@@ -8,7 +8,6 @@ function App() {
       <div className="flex flex-col gap-4 items-start border rounded-lg p-8 w-full max-w-xl shadow-md">
 
         <h1 className="text-3xl ">Bem vindo!!!</h1>
-
         <div className="flex flex-col gap-4">
           <Link
             to="/signup"

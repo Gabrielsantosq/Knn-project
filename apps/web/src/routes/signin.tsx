@@ -53,20 +53,18 @@ function RouteComponent() {
     setLoading(true)
     setFeedback(null)
 
+    const validate = signInSchema.safeParse({ email, password })
+
+    if (!validate.success) {
+      setFeedback({
+        type: "error",
+        message: validate.error.issues[0].message
+      })
+      return
+    }
 
     try {
 
-
-
-          const validate = signInSchema.safeParse({ email, password })
-
-          if (!validate.success) {
-            setFeedback({
-              type: "error",
-              message: validate.error.issues[0].message
-            })
-            return
-          }
       const { error } = await authClient.signIn.email({
         email,
         password,

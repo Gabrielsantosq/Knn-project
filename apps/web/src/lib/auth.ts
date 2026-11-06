@@ -6,7 +6,7 @@ import { sendEmail } from "./email";
 import { user } from "../db/schema/user";
 import { eq } from "drizzle-orm";
 import { generateEmbedding } from "../utils/embeddings";
-import { createProfessionalText } from "../utils/create-profissional";
+import { createProfessionalText } from "../utils/create-professional";
 
 type profissionalFields = {
   profession?: string,
@@ -97,9 +97,7 @@ export const auth = betterAuth({
           if(professional.role !== "provider" || !professional.profession || !professional.abilities) {
             return
           }
-
           const text = createProfessionalText({ profession: professional.profession, abilities: professional.abilities })
-
           const embedding: number[] = await generateEmbedding(text)
 
           await db
@@ -108,8 +106,6 @@ export const auth = betterAuth({
             .where(eq(user.id, userData.id));
         }
       },
-
     },
-
   }
 });

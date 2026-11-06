@@ -1,4 +1,5 @@
-import { createProfessional } from "../utils/create-profissional";
+
+import { createProfessionalText } from "../utils/create-professional";
 import { generateEmbedding } from "../utils/embeddings";
 import { db } from "./client";
 import { user } from "./schema/user";
@@ -55,7 +56,7 @@ const professionals = [
 
 
 for (const p of professionals) {
-  const text = createProfessional(p)
+  const text = createProfessionalText(p)
   const embedding = await generateEmbedding(text)
 
   console.log(p.name, embedding.length)

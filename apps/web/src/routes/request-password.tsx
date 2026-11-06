@@ -40,6 +40,7 @@ function RouteComponent() {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setMessage("")
+    setLoading(true)
 
     const validate = requestSchema.safeParse({ email })
 
@@ -48,27 +49,20 @@ function RouteComponent() {
       return
     }
 
-    setLoading(true)
-
     try {
       const { error } = await authClient.requestPasswordReset({
         email,
         redirectTo: "/change-password"
       })
-
       if (error) {
         setMessage(error.message ?? "Erro inesperado ao tentar encontrar o email")
         return
       }
-
     } catch (errr) {
       setMessage("Email invalido")
-
     } finally {
       setLoading(false)
-
     }
-
   }
 
   return (
